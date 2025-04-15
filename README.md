@@ -2,7 +2,7 @@
 - StudentID:313553037
 - Name:黃瑜明
 ## Introduction
-In this assignment, we utilize a model based on the ResNet architecture to classify natural organisms depicted in images into their corresponding categories. The goal is to accurately identify the species or biological class of each organism, among 100 distinct categories.
+Utilize Faster R-CNN, with ResNet-50 as the backbone to detect individual digits within an image. The model is trained to localize each digit by predicting its bounding box and to classify its corresponding digit class (0–9). After detecting all digits in an image, further process the results to recognize the complete number represented by the combination of detected digits.
 ## How to install
 1. Clone the repository
     ```
