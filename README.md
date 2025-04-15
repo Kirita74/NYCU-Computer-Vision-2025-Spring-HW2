@@ -9,7 +9,9 @@
 3. Download the dataset - Download the dataset form the provided
    [Link](https://drive.google.com/file/d/1fx4Z6xl5b6r4UFkBrn5l0oPEIagZxQ5u/view)
    - Place it in the following structure
-     ``` . ├── code │   ├── main.py │   ├── model.py │   └── test.py ├── data │   ├── train │   ├── val │   └── test ├── environment.yml │   . │   . │   . ```
+     ```
+     . ├── code │   ├── main.py │   ├── model.py │   └── test.py ├── data │   ├── train │   ├── val │   └── test ├── environment.yml │   . │   . │   .
+     ```
 ## Run 
 - Train Model 
   ``` python3 main.py DATAPATH [--num_epochs EPOCH] [--batch_size BATCH_SIZE] [--learning_rate LEARNING_RATE] [--decay DECAY] [--eta_min ETA_MIN] [--pretrained_weight_path PRETRAINED_WEIGHT_PATH] [--save_path SAVE_PATH] [--log_dir LOG_DIR]
