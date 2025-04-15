@@ -26,4 +26,5 @@
 ![Image](image/validation_accuracy.png) 
 ### Confusion Matrix 
 ![Image](image/confusion.png) 
-### Perfomance ||Accuracy(%)| |----------|--| |Validation|90| |Public test|93|
+### Perfomance 
+||Accuracy(%)| |----------|--| |Validation|90| |Public test|93|
