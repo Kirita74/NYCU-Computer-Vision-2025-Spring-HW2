@@ -76,8 +76,8 @@ Utilize Faster R-CNN, with ResNet-50 as the backbone to detect individual digits
 - Example 1
     ![Image](image/example1.jpg)
 - Example 2
-    ![Image](image/example2.jpg)_
-
+    ![Image](image/example2.jpg)
+  
 ### Perfomance
 ||Accuracy(%)|
 |----------|--|
