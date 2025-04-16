@@ -1,4 +1,4 @@
-> # NYCU Computer Vision 2025 Spring HW2
+# NYCU Computer Vision 2025 Spring HW2
 - StudentID:313553037
 - Name:黃瑜明
 ## Introduction
@@ -59,7 +59,7 @@ Utilize Faster R-CNN, with ResNet-50 as the backbone to detect individual digits
 | **ROI Align Output Size**     | 7 × 7                                                                      |
 | **ROI Align Sampling Ratio**  | 2                                                                          |
 | **Optimizer**                 | `AdamW`                                                                    |
-| **Learning Rate**             | 1e-3                                                                       |
+| **Learning Rate**             | 5e-5                                                                       |
 | **Weight Decay**              | 1e-4                                                                       |
 | **Scheduler**                 | `CosineAnnealingLR`                                                        |
 | **T_max**                     | 15                                                                         |
@@ -70,8 +70,12 @@ Utilize Faster R-CNN, with ResNet-50 as the backbone to detect individual digits
 ![Image](image/Epoch_loss.png)
 ![Image](image/Average_Precision.png)
 
+### Example of digit detection and recognition
+![Image](image/example1.jpg)
+![Image](image/example2.jpg)_
+
 ### Perfomance
 ||Accuracy(%)|
 |----------|--|
-|Public mAP|33|
-|Public test|82|
+|Public mAP|35|
+|Public test|79|
