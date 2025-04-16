@@ -67,12 +67,11 @@ Utilize Faster R-CNN, with ResNet-50 as the backbone to detect individual digits
 | **Batch Size**                | 2                                                                          |
 
 ### Training Curve
-![Image](image/training_loss_epoch.png)
-![Image](image/validation_accuracy.png)
-### Confusion Matrix
-![Image](image/confusion.png)
+![Image](image/Epoch_loss.png)
+![Image](image/Average_Precision.png)
+
 ### Perfomance
 ||Accuracy(%)|
 |----------|--|
-|Validation|90|
-|Public test|93|
+|Public mAP|33|
+|Public test|82|
