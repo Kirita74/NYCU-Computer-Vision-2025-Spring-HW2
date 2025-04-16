@@ -67,12 +67,16 @@ Utilize Faster R-CNN, with ResNet-50 as the backbone to detect individual digits
 | **Batch Size**                | 2                                                                          |
 
 ### Training Curve
-![Image](image/Epoch_loss.png)
-![Image](image/Average_Precision.png)
+- Epoch loss
+    ![Image](image/Epoch_loss.png)
+- Mean Average Precision
+    ![Image](image/Average_Precision.png)
 
 ### Example of digit detection and recognition
-![Image](image/example1.jpg)
-![Image](image/example2.jpg)_
+- Example 1
+    ![Image](image/example1.jpg)
+- Example 2
+    ![Image](image/example2.jpg)_
 
 ### Perfomance
 ||Accuracy(%)|
