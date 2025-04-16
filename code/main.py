@@ -3,7 +3,11 @@ import json
 import csv
 import os
 import argparse
+import random
+from torchvision.utils import to_pil_image
 from torch.utils.data.dataloader import DataLoader
+from matplotlib import pyplot as plt
+from matplotlib import patches
 from dataset import CustomDataset
 from tqdm import tqdm
 from PIL import Image
@@ -241,6 +245,58 @@ def generate_task2(json_path='pred.json', output_path='pred.csv'):
         writer.writerows(results)
 
     return results
+
+
+def show_random_prediction(model, dataset, device, label_map=None, score_thresh=0.7):
+    """
+    Show and save a random prediction from the dataset using the model
+    """
+
+    mean = torch.tensor([0.485, 0.456, 0.406], device=device).view(-1, 1, 1)
+    std = torch.tensor([0.229, 0.224, 0.225], device=device).view(-1, 1, 1)
+
+    model.eval()
+    idx = random.randint(0, len(dataset) - 1)
+    image, target = dataset[idx]
+
+    with torch.no_grad():
+        pred = model([image.to(device)])[0]
+
+    denorm_image = image.to(device) * std + mean
+    denorm_image = denorm_image.clamp(0, 1)
+
+    denorm_image = to_pil_image(denorm_image.cpu())
+    fig, ax = plt.subplots(1, figsize=(10, 10))
+    ax.imshow(denorm_image)
+
+    # predict
+    for box, label, score in zip(pred["boxes"], pred["labels"], pred["scores"]):
+        if score < score_thresh:
+            continue
+        x1, y1, x2, y2 = box.tolist()
+        class_name = label_map[label.item()] if label_map else str(
+            label.item())
+        ax.add_patch(patches.Rectangle((x1, y1), x2 - x1, y2 - y1,
+                                       linewidth=2, edgecolor='red', facecolor='none'))
+        ax.text(x1, y1 - 5, f"{class_name} ({score:.2f})",
+                color='white', fontsize=10, bbox=dict(facecolor='red', alpha=0.5))
+
+    # target
+    for box, label in zip(target["boxes"], target["labels"]):
+        x1, y1, x2, y2 = box.tolist()
+        class_name = label_map[label.item()] if label_map else str(
+            label.item())
+        ax.add_patch(patches.Rectangle((x1, y1), x2 - x1, y2 - y1,
+                                       linewidth=2, edgecolor='lime', facecolor='none', linestyle='--'))
+        ax.text(x1, y1 + 10, f"GT: {class_name}",
+                color='white', fontsize=10, bbox=dict(facecolor='green', alpha=0.5))
+
+    plt.axis('off')
+    plt.tightlayout()
+
+    plt.savefig(f"predcit image\img{idx}.jpg",
+                bbox_inches='tight', padinches=0.1)
+    print(f"image saved:img{idx}.jpg")
 
 
 def parse_args():
