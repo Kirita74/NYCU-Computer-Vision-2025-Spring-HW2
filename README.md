@@ -9,7 +9,7 @@ Utilize Faster R-CNN, with ResNet-50 as the backbone to detect individual digits
     git clone git@github.com:Kirita74/NYCU-Computer-Vision-2025-Spring-HW2.git
     cd NYCU-Computer-Vision-2025-Spring-HW2
     ```
-2. Create and activate conda environmen
+2. Create and activate conda environment
     ```
     conda env create -f environment.yml
     conda activate CV
