@@ -65,7 +65,7 @@ def load_data():
     valid_loader = DataLoader(
         valid_dataset, batch_size=BATCH_SIZE, shuffle=False, collate_fn=lambda x: tuple(zip(*x)))
 
-    return train_loader, valid_loader, len(categories)
+    return train_loader, valid_loader, valid_dataset, len(categories)
 
 
 def train():
@@ -74,7 +74,7 @@ def train():
     """
     writer = SummaryWriter(log_dir=LOG_PATH)
 
-    train_loader, valid_loader, num_categories = load_data()
+    train_loader, valid_loader, valid_dataset, num_categories = load_data()
     model = CustomModel(num_categories + 1, anchor_generator=anchoer_generator,
                         roi_pooler=roi_pooler, pretrained=True)
     # model.load_state_dict(torch.load(WEIGHT_PATH, map_location=DEVICE))
@@ -144,6 +144,16 @@ def train():
 
         if metrics["map"] > best_map:
             torch.save(model.state_dict(), WEIGHT_SAVE_PATH)
+
+        label_map = {i: str(i - 1) for i in range(1, 11)}
+
+        show_random_prediction(
+            model=model,
+            dataset=valid_dataset,
+            device=DEVICE,
+            label_map=label_map,
+            score_thresh=0.7,
+        )
 
     writer.close()
 
@@ -252,15 +262,15 @@ def show_random_prediction(model, dataset, device, label_map=None, score_thresh=
     Show and save a random prediction from the dataset using the model
     """
 
-    mean = torch.tensor([0.485, 0.456, 0.406], device=device).view(-1, 1, 1)
-    std = torch.tensor([0.229, 0.224, 0.225], device=device).view(-1, 1, 1)
+    mean = torch.tensor([0.485, 0.456, 0.406], device=DEVICE).view(-1, 1, 1)
+    std = torch.tensor([0.229, 0.224, 0.225], device=DEVICE).view(-1, 1, 1)
 
     model.eval()
     idx = random.randint(0, len(dataset) - 1)
     image, target = dataset[idx]
 
     with torch.no_grad():
-        pred = model([image.to(device)])[0]
+        pred = model([image.to(DEVICE)])[0]
 
     denorm_image = image.to(device) * std + mean
     denorm_image = denorm_image.clamp(0, 1)
