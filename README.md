@@ -82,4 +82,4 @@ Utilize Faster R-CNN, with ResNet-50 as the backbone to detect individual digits
 ||Accuracy(%)|
 |----------|--|
 |Public mAP|35|
-|Public test|79|
+|Public test|29|
